@@ -2,8 +2,8 @@
 ---
 /**
  * @name  {{ site.name }}
- * @description  {{ site.description }}
- * @author  {{ site.author }} <{{ site.author_email }}> ({{ site.url }})
+ * @description  {{ JavaScript Deobfuscator and Unpacker }}
+ * @author  sajidali <sajidali0858687@gmail.com> (https://teachwiki.github.io)
  * @version  {{ site.version }}
  * @copyright  {{ site.author }} 2017
  * @license  {{ site.license }}

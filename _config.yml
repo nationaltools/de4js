@@ -4,14 +4,14 @@ description: JavaScript Deobfuscator and Unpacker
 version: 1.11.1
 author: Zzbaivong
 author_email: Zzbaivong@gmail.com
-url: https://lelinhtinh.github.io
+url: https://teachwiki.github.io
 baseurl: /de4js
-repository: lelinhtinh/de4js
+repository: teachwiki/de4js
 license: MIT
 
 theme: jekyll-theme-hacker
 show_downloads: false
-google_analytics: UA-106940288-1
+google_analytics: 
 sass:
   style: compressed
 

@@ -238,7 +238,130 @@ Settings
     <script type="text/javascript" src="{{ '/assets/js/lib/clipboard-js/clipboard.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/main.js' | relative_url }}" type="text/javascript"></script>
      <script src="{{ '/main.js' | relative_url }}" type="text/javascript"></script>
-   
+       <footer class='footer'>
+            <div class='footer-top'>
+              <b:section class='footer-list' id='Footer-List' maxwidgets='4'>
+                <b:widget id='HTML1' locked='false' title='' type='HTML' version='1'>
+                  <b:widget-settings>
+                    <b:widget-setting name='content'>&lt;h3 class=&#39;footer-item-title&#39;&gt;Information&lt;/h3&gt;
+                      &lt;ul class=&#39;footer-item&#39;&gt;
+                      &lt;li&gt;&lt;a href=&#39;#&#39; target=&#39;_blank&#39; title=&#39;About&#39;&gt;About&lt;/a&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;a href=&#39;#&#39; target=&#39;_blank&#39; title=&#39;FAQ&#39;&gt;FAQ&lt;/a&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;a href=&#39;#&#39; target=&#39;_blank&#39; title=&#39;Contact Us&#39;&gt;Contact Us&lt;/a&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;a href=&#39;#&#39; target=&#39;_blank&#39; title=&#39;Privacy Policy&#39;&gt;Privacy Policy&lt;/a&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;a href=&#39;#&#39; target=&#39;_blank&#39; title=&#39;Terms of Service&#39;&gt;Terms of Service&lt;/a&gt;&lt;/li&gt;
+                      &lt;/ul&gt;</b:widget-setting>
+                  </b:widget-settings>
+                  <b:includable id='main'>
+                    <!-- only display title if it's non-empty -->
+                    <b:if cond='data:title != &quot;&quot;'>
+                      <h2 class='title'><data:title/></h2>
+                    </b:if>
+                    <div class='widget-content'>
+                      <data:content/>
+                    </div>
+
+                    <b:include name='quickedit'/>
+                  </b:includable>
+                </b:widget>
+                <b:widget id='HTML2' locked='false' title='Follow Us' type='HTML' version='1'>
+                  <b:widget-settings>
+                    <b:widget-setting name='content'>&lt;h3 class=&#39;footer-item-title&#39;&gt;Support&lt;/h3&gt;
+                      &lt;ul class=&#39;footer-item&#39;&gt;
+                      &lt;li&gt;&lt;a href=&#39;#&#39; target=&#39;_blank&#39; title=&#39;Paypal&#39;&gt;Paypal&lt;/a&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;a href=&#39;#&#39; target=&#39;_blank&#39; title=&#39;Patreon&#39;&gt;Patreon&lt;/a&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;a href=&#39;#&#39; target=&#39;_blank&#39; title=&#39;Open Collective&#39;&gt;Open Collective&lt;/a&gt;&lt;/li&gt;
+                      &lt;/ul&gt;</b:widget-setting>
+                  </b:widget-settings>
+                  <b:includable id='main'>
+                    <!-- only display title if it's non-empty -->
+                    <b:if cond='data:title != &quot;&quot;'>
+                      <h2 class='title'><data:title/></h2>
+                    </b:if>
+                    <div class='widget-content'>
+                      <data:content/>
+                    </div>
+
+                    <b:include name='quickedit'/>
+                  </b:includable>
+                </b:widget>
+                <b:widget id='HTML3' locked='false' title='' type='HTML' version='1'>
+                  <b:widget-settings>
+                    <b:widget-setting name='content'>&lt;h3 class=&#39;footer-item-title&#39;&gt;Network&lt;/h3&gt;
+                      &lt;ul class=&#39;footer-item&#39;&gt;
+                      &lt;li&gt;&lt;a href=&#39;#&#39; target=&#39;_blank&#39; title=&#39;Android&#39;&gt;Android&lt;/a&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;a href=&#39;#&#39; target=&#39;_blank&#39; title=&#39;IOS&#39;&gt;IOS&lt;/a&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;a href=&#39;#&#39; target=&#39;_blank&#39; title=&#39;Windows&#39;&gt;Windows&lt;/a&gt;&lt;/li&gt;
+                      &lt;/ul&gt;</b:widget-setting>
+                  </b:widget-settings>
+                  <b:includable id='main'>
+                    <!-- only display title if it's non-empty -->
+                    <b:if cond='data:title != &quot;&quot;'>
+                      <h2 class='title'><data:title/></h2>
+                    </b:if>
+                    <div class='widget-content'>
+                      <data:content/>
+                    </div>
+
+                    <b:include name='quickedit'/>
+                  </b:includable>
+                </b:widget>
+                <b:widget id='HTML4' locked='false' title='' type='HTML' version='1'>
+                  <b:widget-settings>
+                    <b:widget-setting name='content'>&lt;a class=&#39;footer-logo&#39; href=&#39;https://era-material.blogspot.com/&#39; title=&#39;Era Material (Footer Logo)&#39;&gt;
+                      &lt;img alt=&#39;Era Material (Footer Logo)&#39; class=&#39;footer-logo-img&#39; src=&#39;https://3.bp.blogspot.com/-eOmSuAF0Iwg/W5h6QsEyXXI/AAAAAAAABJk/kHmEyC8P344njv2NZiXZ5SpAl0C2DOLtACLcBGAs/eramaterial-logo-214.png&#39;/&gt;
+                      &lt;/a&gt;
+                      &lt;div class=&#39;footer-description&#39;&gt;&lt;strong&gt;Era Material&lt;/strong&gt; is &lt;i&gt;Material Design&lt;/i&gt;
+                      template for &lt;strong&gt;Blogger&lt;/strong&gt;. This template only Premium version.
+                      &lt;/div&gt;
+                      &lt;div class=&#39;footer-social&#39;&gt;
+                      &lt;ul&gt;
+                      &lt;li&gt;&lt;a href=&#39;#&#39; target=&#39;_blank&#39; title=&#39;Facebook&#39;&gt;&lt;i aria-hidden=&#39;true&#39; class=&#39;mdi mdi-facebook&#39;/&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;a href=&#39;#&#39; target=&#39;_blank&#39; title=&#39;Twitter&#39;&gt;&lt;i aria-hidden=&#39;true&#39; class=&#39;mdi mdi-twitter&#39;/&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;a href=&#39;#&#39; target=&#39;_blank&#39; title=&#39;Google Plus&#39;&gt;&lt;i aria-hidden=&#39;true&#39; class=&#39;mdi mdi-google-plus&#39;/&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;a href=&#39;#&#39; target=&#39;_blank&#39; title=&#39;Telegram&#39;&gt;&lt;i aria-hidden=&#39;true&#39; class=&#39;mdi mdi-telegram&#39;/&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;a href=&#39;#&#39; target=&#39;_blank&#39; title=&#39;GitHub&#39;&gt;&lt;i aria-hidden=&#39;true&#39; class=&#39;mdi mdi-github-circle&#39;/&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+                      &lt;/ul&gt;
+                      &lt;/div&gt;
+                      &lt;div class=&#39;footer-translate&#39;&gt;
+                      &lt;div id=&#39;google_translate_element&#39;/&gt;
+                      &lt;/div&gt;
+                      &lt;div class=&#39;footer-options&#39;&gt;
+                      &lt;!-- Your content here --&gt;
+                      &lt;/div&gt;&lt;/div&gt;</b:widget-setting>
+                  </b:widget-settings>
+                  <b:includable id='main'>
+                    <!-- only display title if it's non-empty -->
+                    <b:if cond='data:title != &quot;&quot;'>
+                      <h2 class='title'><data:title/></h2>
+                    </b:if>
+                    <div class='widget-content'>
+                      <data:content/>
+                    </div>
+
+                    <b:include name='quickedit'/>
+                  </b:includable>
+                </b:widget>
+              </b:section>
+            </div>
+            <div class='footer-bottom'>
+              <div class='footer-holder'>
+                <div id='footer-copyright'>
+                  <span class='footer-text'>&amp;copy; <span id='copyright-years'><script>new Date().getYear();</script></span></span>
+                  <span class='copyright'><data:blog.title/></span><span class='footer-text'> | Powered by
+                  Blogger</span>
+                </div>
+                <span><strong>Material Design Blogger</strong></span>
+                <div id='footer-designer'>
+                  <span class='footer-text'>Made with <svg aria-hidden='true' class='love' focusable='false' viewBox='0 0 24 24'>
+                    <path d='M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z'>
+                    </path>
+                    </svg> by</span>
+                  <span class='notranslate'><a href='https://themeplatinum.blogspot.com' id='designer' rel='dofollow' target='_blank' title='ThemePlatinum'>ThemePlatinum</a></span>
+                </div>
+              </div>
+            </div>
+          </footer>
     
 </body>
 

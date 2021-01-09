@@ -238,7 +238,72 @@ Settings
     <script type="text/javascript" src="{{ '/assets/js/lib/clipboard-js/clipboard.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/main.js' | relative_url }}" type="text/javascript"></script>
      <script src="{{ '/main.js' | relative_url }}" type="text/javascript"></script>
-       <footer class='footer'>
+   <div class='adw'>
+              <b:section class='atb' id='Ads-Bottom' maxwidgets='1'>
+                <b:widget id='HTML9' locked='false' title='' type='HTML' version='1'>
+                  <b:widget-settings>
+                    <b:widget-setting name='content'><![CDATA[<div style="background-color:#eee;padding:48px 0;width:100%;max-width:970px;font-size:16px;color:#212121">Horizontal Ad Space</div>]]></b:widget-setting>
+                  </b:widget-settings>
+                  <b:includable id='main'>
+                    <data:content/>
+                  </b:includable>
+                </b:widget>
+              </b:section>
+            </div>
+          </div><!-- ./ Content Wrap -->
+          <b:section class='slider js' id='Slider-Popular' maxwidgets='1'>
+            <b:widget cond='data:view.isHomepage' id='PopularPosts1' locked='false' title='Popular Posts' type='PopularPosts' version='1'>
+              <b:widget-settings>
+                <b:widget-setting name='numItemsToShow'>10</b:widget-setting>
+                <b:widget-setting name='showThumbnails'>true</b:widget-setting>
+                <b:widget-setting name='showSnippets'>true</b:widget-setting>
+                <b:widget-setting name='timeRange'>ALL_TIME</b:widget-setting>
+              </b:widget-settings>
+              <b:includable id='main'>
+                <b:if cond='data:title != &quot;&quot;'><h2><data:title/></h2></b:if>
+                <div class='slider-ui'>
+                  <button aria-label='Previous' class='btn btn-fab slider-prev' tabindex='-1'>
+                    <svg aria-hidden='true' focusable='false' viewBox='0 0 24 24'><path d='M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z'/></svg>
+                  </button>
+                  <button aria-label='Next' class='btn btn-fab slider-next' tabindex='-1'>
+                    <svg aria-hidden='true' focusable='false' viewBox='0 0 24 24'><path d='M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z'/></svg>
+                  </button>
+                  <div class='slider-container'>
+                    <b:loop values='data:posts' var='post'>
+                      <div class='slider-item'>
+                        <link expr:href='data:post.href' rel='prefetch'/>
+                        <a class='slider-href' expr:href='data:post.href' expr:title='data:post.title'>
+                          <img class='slider-image js-lazy' expr:alt='data:post.title' expr:data-src='resizeImage(data:post.thumbnail, 300)' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEXu7u6DSdFtAAAACklEQVQI12NgAAAAAgAB4iG8MwAAAABJRU5ErkJggg=='/>
+                          <span class='slider-title'><data:post.title/></span>
+                        </a>
+                      </div>
+                    </b:loop>
+                  </div>
+                </div>
+
+              </b:includable>
+            </b:widget>
+          </b:section>
+          <b:section class='subscribebox' id='Subscribe' maxwidgets='1'>
+            <b:widget id='FollowByEmail1' locked='false' title='Subscribe to our newsletter' type='FollowByEmail' version='1'>
+              <b:includable id='main'>
+                <form action='https://feedburner.google.com/fb/a/mailverify' expr:onsubmit='&quot;window.open(\&quot;https://feedburner.google.com/fb/a/mailverify?uri=&quot; + data:feedPath + &quot;\&quot;, \&quot;popupwindow\&quot;, \&quot;scrollbars=yes,width=550,height=520\&quot;); return true&quot;' method='post' target='popupwindow'>
+                  <div class='subscribebox-title'>
+                    <h3><data:title/></h3>
+                  </div>
+                  <div class='subscribebox-input textfield'>
+                    <input aria-label='Email Address' aria-required='true' autocomplete='off' class='subscribebox-email' name='email' placeholder='Email Address' required='required' type='email' value=''/>
+                  </div>
+                  <input expr:value='data:feedPath' name='uri' type='hidden'/>
+                  <input name='loc' type='hidden' value='en_US'/>
+                  <div class='subscribebox-submit'>
+                    <button aria-label='Subscribe' class='btn btn-raised btn-secondary subscribebox-button js-ripple' type='submit'><i aria-hidden='true' class='icon-left mdi mdi-email'/>Subscribe</button>
+                  </div>
+                </form>
+              </b:includable>
+            </b:widget>
+          </b:section>
+          <footer class='footer'>
             <div class='footer-top'>
               <b:section class='footer-list' id='Footer-List' maxwidgets='4'>
                 <b:widget id='HTML1' locked='false' title='' type='HTML' version='1'>
@@ -362,6 +427,184 @@ Settings
               </div>
             </div>
           </footer>
+        </main>
+        <div class='go-top'>
+          <button aria-label='Back to Top' class='btn btn-fab back-top js-tooltip' data-scroll='body' data-scroll-speed='300' tabindex='-1' title='Back to Top'>
+            <svg aria-hidden='true' focusable='false' viewBox='0 0 24 24'>
+              <path d='M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z'/>
+            </svg>
+          </button>
+        </div><!-- ./ to top -->
+        <div aria-describedby='notification-content' aria-labelledby='dialog-notification' aria-modal='true' class='dialog top' id='notification' role='alertdialog'>
+          <div class='dialog-scrim'/>
+          <div class='dialog-container'>
+            <div class='dialog-surface'>
+              <div class='dialog-header'>
+                <h4 class='dialog-title' id='dialog-notification'>Notification</h4>
+              </div>
+              <div class='dialog-content' id='notification-content'/>
+              <div class='dialog-footer'>
+                <button class='btn btn-flat btn-secondary js-dialog-close' data-close-dialog='notification'>Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ./ Modal -->
+      </div><!-- ./ App -->
+      <script src='https://cdn.staticaly.com/gh/illvart/p/master/era-material/js/v1_1/main.js?v=2625559922'/>
+      <script>
+        if (&quot;undefined&quot; !== typeof eraMaterial) {
+          eraMaterial.popup({
+            style: &quot;height=500, width=500, left=10, top=10, resizable=yes, scrollbars=yes, toolbar=yes, menubar=no, location=no, directories=no, status=yes&quot;
+          });
+          eraMaterial.notranslate({
+            selector: &quot;pre, code&quot;
+          });
+          eraMaterial.doubleclick({
+            selector: &quot;pre, code, kbd, mark, textarea, .link&quot;
+          });
+          eraMaterial.ripple({
+            selector: &quot;.btn:not(.no-ripple), .toolbar-action, #drawer-list a, #drawer-list button, .dropdown-content ul &gt; li, .dropdown-action, .accordion-toggle&quot;
+          });
+          eraMaterial.toc({
+            selector: &quot;.post-body h3, .post-body .has-heading&quot;,
+            heading: &quot;Table of Contents&quot;,
+            listType: &quot;ol&quot;,
+            style: null,
+            scrollAnim: true,
+            scrollSpeed: 300,
+            scrollOffset: -84
+          });
+          eraMaterial.anchor({
+            title: &quot;Link to this heading&quot;,
+            heading: &quot;.post-body h2, .post-body h3, .post-body h4&quot;
+          });
+          eraMaterial.analytics({
+            command: &quot;blogger.send&quot;
+          });
+          eraMaterial.clipboard({
+            linkCopied: &quot;Link copied to clipboard!&quot;,
+            copied: &quot;Copied to clipboard!&quot;,
+            copy: &quot;Copy&quot;,
+            command: &quot;blogger.send&quot;
+          });
+          eraMaterial.snackbar({
+            position: &quot;snackbar-top snackbar-right&quot;
+          });
+          eraMaterial.accordion({
+            firstActive: false
+          });
+          eraMaterial.toolbar({
+            hide: true,
+            showBottom: true
+          });
+          eraMaterial.scrollIndicator(true);
+          eraMaterial.stickyWidget(true);
+          eraMaterial.shufflePosts(false);
+
+          eraMaterial.loadImages({
+            throttle: 200,
+            threshold: 200
+          });
+          eraMaterial.antiInspect(false);
+        }
+      </script>
+      <b:if cond='data:view.isMultipleItems'>
+        <script>
+          var loadmoreSettings = {
+            loading: &quot;Loading...&quot;
+          };
+          loadJS(&quot;https://cdn.staticaly.com/gh/illvart/p/master/era-material/js/v1_1/loadmore.min.js?v=2625559922&quot;)
+        </script>
+        <b:if cond='data:view.isHomepage'>
+        <script>
+          var featureSettings = {
+            homepage: &quot;<data:blog.homepageUrl/>&quot;,
+            max_results: &quot;12&quot;,
+            posted_by: &quot;Posted by&quot;,
+            lang: &quot;en&quot;,
+            noimage: &quot;https://4.bp.blogspot.com/-1H0xACwGCqs/W_lG6hilsNI/AAAAAAAAAHg/hCs4hDWK7QMtBfzxOuGU5orcktky513IgCLcBGAs/s1600/noimage.png&quot;,
+            mask: &quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEXu7u6DSdFtAAAACklEQVQI12NgAAAAAgAB4iG8MwAAAABJRU5ErkJggg==&quot;
+          };
+          loadJS(&quot;https://cdn.staticaly.com/gh/illvart/p/master/era-material/js/v1_1/feature.min.js?v=2625559922&quot;)
+        </script>
+        <script>//<![CDATA[
+          var slider = tns({
+            container:".slider-container",autoplayButtonOutput:false,arrowKeys:false,nextButton:".slider-next",prevButton:".slider-prev",
+            items:2,responsive:{576:{items:3},768:{items:4},992:{items:5}},lazyload:false,nav:false,slideBy:"1",//]]>
+            autoplay: true,
+            autoplayHoverPause: true,
+            autoplayTimeout: 5000,
+            speed: 600,
+            mouseDrag: true,
+            rewind: true,
+            loop: false,
+            gutter: 4,
+            useLocalStorage: false
+          })</script>
+        </b:if>
+        <script>
+          var randomSettings = {
+            homepage: &quot;<data:blog.homepageUrl/>&quot;,
+            read_more: &quot;Read&quot;,
+            loading_title: &quot;Loading...&quot;,
+            close_title: &quot;Close&quot;,
+            feature_title: &quot;Fire news&quot;,
+            snackbar: &quot;snackbar-top&quot;,
+            space: &quot;&amp;nbsp; ?? &amp;nbsp;&quot;
+          };
+          loadJS(&quot;https://cdn.staticaly.com/gh/illvart/p/master/era-material/js/v1_1/random.min.js?v=2625559922&quot;)
+        </script>
+      </b:if>
+      <b:if cond='data:view.isPost'>
+        <script>
+          var relatedSettings = {
+            homepage: &quot;<data:blog.homepageUrl/>&quot;,
+            /*<![CDATA[*/
+            read_more: "Read",
+            noimage: "https://4.bp.blogspot.com/-1H0xACwGCqs/W_lG6hilsNI/AAAAAAAAAHg/hCs4hDWK7QMtBfzxOuGU5orcktky513IgCLcBGAs/s1600/noimage.png",
+            mask: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEXu7u6DSdFtAAAACklEQVQI12NgAAAAAgAB4iG8MwAAAABJRU5ErkJggg==",
+            snippet_length: 100,
+            title_length: "auto",
+            styles: 1, // or 2
+            results: 6, // or 9
+            blank: true // or false
+          };
+          loadJS("https://cdn.staticaly.com/gh/illvart/p/master/era-material/js/v1_1/related.min.js?v=2625559922");
+          /*]]>*/
+        </script>
+      </b:if>
+      <script>//<![CDATA[
+        if ("undefined" !== typeof va) {
+          va.ready(function() {
+            // twemoji
+            "undefined"!==typeof twemoji&&twemoji.parse(document.body,{callback:function(b,a,c){switch(b){case "a9":case "ae":case "2122":return!1}return"".concat(a.base,a.size,"/",b,a.ext)}});
+            // adsense
+            va.each(va.$$(".adsbygoogle"),function(){(adsbygoogle=window.adsbygoogle||[]).push({})});
+            // your plugin here
+          });
+        }
+        //]]></script>
+      <b:else/>
+      <b:comment>Error Page</b:comment>
+      <div id='app'>
+        <noscript id='notif'>
+          <div class='notif-warning'><strong>WARNING!</strong> We detect you need <a href='https://www.enable-javascript.com' rel='nofollow' target='_blank' title='Enable JavaScript!'>enable JavaScript</a> to run this blog!</div>
+        </noscript>
+        <!--[if lt IE 9]> <div id='notif'> <div class='notif-warning'>We detect you are using an <strong>outdated</strong> browser. Please <strong>upgrade</strong> your browser to improve your experience.</div> </div> <![endif]-->
+        <div class='error no-select'>
+          <div class='error-wrap'>
+            <h1>404</h1>
+            <p>Oops, pages you&#39;ve visited are not found, maybe has been remove or incorrect URLs.</p>
+            <h2>Back to Homepage?</h2>
+            <button class='btn btn-flat btn-outline btn-secondary' onClick='window.history.back()'>Go Back</button>
+            <a class='btn btn-flat btn-outline btn-primary' expr:href='data:blog.homepageUrl' title='Homepage'>Homepage</a>
+          </div>
+        </div>
+      </div>
+    </b:if>
+    <!-- Era Material: v1.1, Blog: Era Material demo -->
+
     
 </body>
 

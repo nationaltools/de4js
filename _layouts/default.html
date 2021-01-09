@@ -26,7 +26,16 @@
 
 <body>
 <div class='dismissible' id='app'>
-
+<a class='skip' href='#main' tabindex='0' title='Skip to main content'>
+          Skip to main content
+        </a>
+<noscript id='notif'>
+<div class='notif-warning'><strong>WARNING!</strong> We detect you need <a href='https://www.enable-javascript.com' rel='nofollow' target='_blank' title='Enable JavaScript!'>enable JavaScript</a> to run this blog!</div>
+</noscript>
+<!--[if lt IE 9]> <div id='notif'> <div class='notif-warning'>We detect you are using an <strong>outdated</strong> browser. Please <strong>upgrade</strong> your browser to improve your experience.</div> </div> <![endif]-->
+<div id='loading'>
+<div id='loading-bar'></div>
+</div>
 <div class='indicator'>
 <div class='indicator-bar'></div>
 </div>
@@ -65,7 +74,8 @@ Article Forge
 </svg>
 </button>
 </form>
-
+</div>
+</div>
 <div class='toolbar-title notranslate'>
 <a class='toolbar-title-blog' href='https://articleforge.blogspot.com/' title='Article Forge'>
 Article Forge
@@ -187,8 +197,6 @@ Settings
 </div>
 </div>
 </div>
-  
-
 
 <div id='content-wrap'>
 <div class='adw'>
@@ -199,9 +207,6 @@ Settings
 </div></div>
 </div>
 
-   
-    
-    
     <div class="container">
         <section id="main_content">
             <form class="wrap" name="bvDecode">

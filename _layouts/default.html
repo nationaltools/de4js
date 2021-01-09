@@ -26,19 +26,423 @@
 
 <body>
 
-    <header>
-        <div class="container">
-            <h1>{{ site.name }}<sup id="offline">Offline</sup></h1>
-            <h2>{{ site.description }}</h2>
-
-            <section id="downloads">
-                {% if site.show_downloads %}
-                <a href="{{ site.github.zip_url }}" class="btn">Download as .zip</a>
-                <a href="{{ site.github.tar_url }}" class="btn">Download as .tar.gz</a> {% endif %}
-                <a href="{{ site.github.repository_url }}" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-            </section>
+ <b:if cond='!data:view.isError'>
+      <b:class cond='!data:view.isMultipleItems' name='js-anchors'/>
+      <div id='app'>
+        <b:class cond='!data:view.isMultipleItems' name='dismissible'/>
+        <a class='skip' href='#main' tabindex='0' title='Skip to main content'>
+          Skip to main content
+        </a>
+        <noscript id='notif'>
+          <div class='notif-warning'><strong>WARNING!</strong> We detect you need <a href='https://www.enable-javascript.com' rel='nofollow' target='_blank' title='Enable JavaScript!'>enable JavaScript</a> to run this blog!</div>
+        </noscript>
+        <!--[if lt IE 9]> <div id='notif'> <div class='notif-warning'>We detect you are using an <strong>outdated</strong> browser. Please <strong>upgrade</strong> your browser to improve your experience.</div> </div> <![endif]-->
+        <div id='loading'>
+          <div id='loading-bar'/>
         </div>
-    </header>
+        <div class='indicator'>
+          <div class='indicator-bar'/>
+        </div>
+        <div id='toolbar' role='toolbar'>
+          <b:class cond='!data:view.isMultipleItems' name='has-toolbar'/>
+          <div class='toolbar-wrap'>
+            <div class='toolbar-row-group'>
+              <div class='toolbar-row'>
+                <div class='toolbar-content toolbar-left'>
+                  <div class='toolbar-fixed'>
+                    <button aria-expanded='false' aria-label='Navigation' class='toolbar-action reset js-drawer js-tooltip' title='Navigation'>
+                      <svg aria-hidden='true' class='toolbar-icon' focusable='false' viewBox='0 0 24 24'>
+                        <path d='M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16'/>
+                      </svg>
+                    </button>
+                    <b:if cond='data:view.isSingleItem'>
+                      <div class='toolbar-top'>
+                        <div class='toolbar-blog-title notranslate' role='banner'>
+                          <a expr:href='data:blog.homepageUrl' expr:title='data:blog.title'>
+                            <h1>
+                              <data:blog.title/>
+                            </h1>
+                          </a>
+                        </div>
+                        <div class='toolbar-searchbar' role='search'>
+                          <form action='/search' target='_top'>
+                            <button aria-label='Search' class='sb-search reset js-ripple js-tooltip' title='Search' type='submit'>
+                              <svg aria-hidden='true' focusable='false' viewBox='0 0 24 24'>
+                                <path d='M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z'>
+                                </path>
+                              </svg>
+                            </button>
+                            <input aria-label='Search this blog' autocomplete='off' id='sb-input' name='q' placeholder='Search this blog' type='text' value=''/>
+                            <button aria-hidden='true' aria-label='Clear' class='sb-clear reset js-ripple js-tooltip' tabindex='-1' title='Clear' type='button'>
+                              <svg aria-hidden='true' focusable='false' viewBox='0 0 24 24'>
+                                <path d='M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z'>
+                                </path>
+                              </svg>
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                      <div class='toolbar-title notranslate'>
+                        <a class='toolbar-title-blog' expr:href='data:blog.homepageUrl' expr:title='data:blog.title'>
+                          <data:blog.title/>
+                        </a>
+                        <svg aria-hidden='true' class='toolbar-arrow' viewBox='0 0 24 24'>
+                          <path d='M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z'/>
+                        </svg>
+                        <span class='toolbar-title-page'>
+                          <b:if cond='data:view.isPost'>Article<b:else/>Page</b:if>
+                        </span>
+                        <svg aria-hidden='true' class='toolbar-arrow' viewBox='0 0 24 24'>
+                          <path d='M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z'/>
+                        </svg>
+                        <span class='toolbar-title-view'>
+                          <data:view.title/>
+                        </span>
+                      </div> 
+                      <b:else/>
+                      <div class='toolbar-title notranslate'>
+                        <span class='toolbar-title-blog'>
+                          <data:blog.title/>
+                        </span>
+                      </div>
+                    </b:if>
+                  </div>
+                </div>
+                <div class='toolbar-content toolbar-right'>
+                  <div class='toolbar-fixed'>
+                    <button aria-expanded='false' aria-label='Search' class='toolbar-action reset js-search js-tooltip' title='Search'>
+                      <svg aria-hidden='true' class='toolbar-icon' focusable='false' viewBox='0 0 24 24'>
+                        <path d='M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z'>
+                        </path>
+                      </svg>
+                    </button>
+                    <div aria-hidden='true' id='toolbar-search' role='search'>
+                      <form action='/search' target='_top'>
+                        <button aria-label='Search' class='ts-search reset js-tooltip' title='Search' type='submit'>
+                          <svg aria-hidden='true' focusable='false' viewBox='0 0 24 24'>
+                            <path d='M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z'>
+                            </path>
+                          </svg>
+                        </button>
+                        <input aria-label='Search this blog' autocomplete='off' id='ts-input' name='q' placeholder='Search this blog' type='text' value=''/>
+                        <button aria-label='Close' class='ts-close reset js-tooltip' title='Close' type='button'>
+                          <svg aria-hidden='true' focusable='false' viewBox='0 0 24 24'>
+                            <path d='M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z'>
+                            </path>
+                          </svg>
+                        </button>
+                      </form>
+                    </div>
+                    <div class='toolbar-desktop'>
+                      <a aria-label='Buy this template' class='toolbar-action reset js-tooltip' href='https://bit.ly/EraMaterial' target='_blank' title='Buy this template'>
+                        <svg aria-hidden='true' class='toolbar-icon' focusable='false' viewBox='0 0 24 24'>
+                          <path d='M17,18C15.89,18 15,18.89 15,20A2,2 0 0,0 17,22A2,2 0 0,0 19,20C19,18.89 18.1,18 17,18M1,2V4H3L6.6,11.59L5.24,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42A0.25,0.25 0 0,1 7.17,14.75C7.17,14.7 7.18,14.66 7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.58 17.3,11.97L20.88,5.5C20.95,5.34 21,5.17 21,5A1,1 0 0,0 20,4H5.21L4.27,2M7,18C5.89,18 5,18.89 5,20A2,2 0 0,0 7,22A2,2 0 0,0 9,20C9,18.89 8.1,18 7,18Z'>
+                          </path>
+                        </svg>
+                      </a>
+                    </div>
+                    <button aria-label='Notification' class='toolbar-action reset is-notif js-tooltip js-dialog-open' data-open-dialog='notification' title='Notification'>
+                      <svg aria-hidden='true' class='toolbar-icon' focusable='false' viewBox='0 0 24 24'>
+                        <path d='M21,19V20H3V19L5,17V11C5,7.9 7.03,5.17 10,4.29C10,4.19 10,4.1 10,4A2,2 0 0,1 12,2A2,2 0 0,1 14,4C14,4.1 14,4.19 14,4.29C16.97,5.17 19,7.9 19,11V17L21,19M14,21A2,2 0 0,1 12,23A2,2 0 0,1 10,21'>
+                        </path>
+                      </svg>
+                    </button>
+                    <button aria-expanded='false' aria-label='Utilities' class='toolbar-action reset js-tooltip js-dropdown-toggle' data-toggle-dropdown='dropdown-menu' title='Utilities'>
+                      <svg aria-hidden='true' class='toolbar-icon' focusable='false' viewBox='0 0 24 24'>
+                        <path d='M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z'>
+                        </path>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class='dropdown' id='dropdown-menu'>
+                    <b:section id='Dropdown' maxwidgets='1'>
+                      <b:widget id='HTML5' locked='false' title='' type='HTML' version='1'>
+                        <b:widget-settings>
+                          <b:widget-setting name='content'>&lt;ul&gt;
+  &lt;li class=&quot;js-ripple&quot;&gt;&lt;a href=&quot;#&quot; title=&quot;One&quot; tabindex=&quot;-1&quot;&gt;&lt;span&gt;One&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li class=&quot;js-ripple&quot;&gt;&lt;a href=&quot;#&quot; title=&quot;Two&quot; tabindex=&quot;-1&quot;&gt;&lt;span&gt;Two&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li class=&quot;js-ripple&quot;&gt;&lt;a href=&quot;#&quot; title=&quot;Three&quot; tabindex=&quot;-1&quot;&gt;&lt;span&gt;Three&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li class=&quot;divider js-ripple&quot;&gt;&lt;/li&gt;
+  &lt;li class=&quot;js-ripple&quot;&gt;
+    &lt;button tabindex=&quot;-1&quot;&gt;
+      &lt;svg viewbox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;
+          &lt;path d=&quot;M12,17.56L16.07,16.43L16.62,10.33H9.38L9.2,8.3H16.8L17,6.31H7L7.56,12.32H14.45L14.22,14.9L12,15.5L9.78,14.9L9.64,13.24H7.64L7.93,16.43L12,17.56M4.07,3H19.93L18.5,19.2L12,21L5.5,19.2L4.07,3Z&quot;&gt;&lt;/path&gt;
+      &lt;/svg&gt;
+      &lt;span&gt;HTML5 icon svg&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;js-ripple&quot;&gt;
+    &lt;button tabindex=&quot;-1&quot;&gt;&lt;i class=&quot;mdi mdi-language-javascript&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;JavaScript mdi icon&lt;/span&gt;&lt;/button&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;dropdown-subheader&quot;&gt;
+Settings
+&lt;/div&gt;
+&lt;div class=&quot;dropdown-menu&quot;&gt;
+&lt;button class=&quot;dropdown-action reset js-ripple&quot; data-fullscreen=&quot;&quot;&gt;
+&lt;svg aria-hidden=&quot;true&quot; class=&quot;dropdown-action-icon&quot; focusable=&quot;false&quot; viewbox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+&lt;span&gt;Fullscreen&lt;/span&gt;
+&lt;/button&gt;
+&lt;button class=&quot;dropdown-action reset js-ripple&quot; data-night-mode=&quot;&quot;&gt;
+&lt;svg aria-hidden=&quot;true&quot; class=&quot;dropdown-action-icon&quot; focusable=&quot;false&quot; viewbox=&quot;0 0 24 24&quot;&gt;&lt;path class=&quot;is-light&quot; d=&quot;M12,2A7,7 0 0,1 19,9C19,11.38 17.81,13.47 16,14.74V17A1,1 0 0,1 15,18H9A1,1 0 0,1 8,17V14.74C6.19,13.47 5,11.38 5,9A7,7 0 0,1 12,2M9,21V20H15V21A1,1 0 0,1 14,22H10A1,1 0 0,1 9,21M12,4A5,5 0 0,0 7,9C7,11.05 8.23,12.81 10,13.58V16H14V13.58C15.77,12.81 17,11.05 17,9A5,5 0 0,0 12,4Z&quot;&gt;&lt;/path&gt;&lt;path class=&quot;is-night hidden&quot; d=&quot;M12,2A7,7 0 0,0 5,9C5,11.38 6.19,13.47 8,14.74V17A1,1 0 0,0 9,18H15A1,1 0 0,0 16,17V14.74C17.81,13.47 19,11.38 19,9A7,7 0 0,0 12,2M9,21A1,1 0 0,0 10,22H14A1,1 0 0,0 15,21V20H9V21Z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+&lt;span&gt;Night Mode&lt;/span&gt;
+&lt;/button&gt;
+&lt;button class=&quot;dropdown-action reset js-ripple&quot; data-rtl-mode=&quot;&quot;&gt;
+&lt;svg aria-hidden=&quot;true&quot; class=&quot;dropdown-action-icon&quot; focusable=&quot;false&quot; viewbox=&quot;0 0 24 24&quot;&gt;&lt;path class=&quot;is-ltr&quot; d=&quot;M8,17V14L4,18L8,22V19H20V17M10,10V15H12V4H14V15H16V4H18V2H10A4,4 0 0,0 6,6A4,4 0 0,0 10,10Z&quot;&gt;&lt;/path&gt;&lt;path class=&quot;is-rtl hidden&quot; d=&quot;M21,18L17,14V17H5V19H17V22M9,10V15H11V4H13V15H15V4H17V2H9A4,4 0 0,0 5,6A4,4 0 0,0 9,10Z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+&lt;span&gt;Right to Left/Left to Right&lt;/span&gt;
+&lt;/button&gt;
+&lt;/div&gt;</b:widget-setting>
+                        </b:widget-settings>
+                        <b:includable id='main'>
+  <!-- only display title if it's non-empty -->
+  <b:if cond='data:title != &quot;&quot;'>
+    <h2 class='title'><data:title/></h2>
+  </b:if>
+  <div class='dropdown-content'>
+    <data:content/>
+  </div>
+
+  <b:include name='quickedit'/>
+</b:includable>
+                      </b:widget>
+                    </b:section>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+        </div>
+        <b:if cond='data:view.isMultipleItems'>
+          <header id='header'>
+            <b:section id='Header' maxwidgets='1' showaddelements='no'>
+              <b:widget id='Header1' locked='true' title='Anewsia (Header)' type='Header' version='1'>
+                <b:widget-settings>
+                  <b:widget-setting name='displayUrl'/>
+                  <b:widget-setting name='displayHeight'>0</b:widget-setting>
+                  <b:widget-setting name='sectionWidth'>-1</b:widget-setting>
+                  <b:widget-setting name='useImage'>false</b:widget-setting>
+                  <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
+                  <b:widget-setting name='imagePlacement'>BEHIND</b:widget-setting>
+                  <b:widget-setting name='displayWidth'>0</b:widget-setting>
+                </b:widget-settings>
+                <b:includable id='main'>
+                  <b:comment>
+                    <b:if cond='data:useImage'>
+                      <b:if cond='data:imagePlacement == &quot;BEHIND&quot;'>
+                        <!--
+Show image as background to text. You can't really calculate the width
+reliably in JS because margins are not taken into account by any of
+clientWidth, offsetWidth or scrollWidth, so we don't force a minimum
+width if the user is using shrink to fit.
+This results in a margin-width's worth of pixels being cropped. If the
+user is not using shrink to fit then we expand the header.
+-->
+                        <b:if cond='data:mobile'>
+                          <div id='header-inner'>
+                            <div class='titlewrapper' style='background: transparent'>
+                              <h1 class='title' style='background: transparent; border-width: 0px'>
+                                <b:include name='title'/>
+                              </h1>
+                            </div>
+                            <b:include name='description'/>
+                          </div>
+                          <b:else/>
+                          <div expr:style='&quot;background-image: url(\&quot;&quot; + data:sourceUrl + &quot;\&quot;); &quot;                      + &quot;background-position: &quot;                      + data:backgroundPositionStyleStr + &quot;; &quot;                      + data:widthStyleStr                      + &quot;min-height: &quot; + data:height                      + &quot;_height: &quot; + data:height                      + &quot;background-repeat: no-repeat; &quot;' id='header-inner'>
+                            <div class='titlewrapper' style='background: transparent'>
+                              <h1 class='title' style='background: transparent; border-width: 0px'>
+                                <b:include name='title'/>
+                              </h1>
+                            </div>
+                            <b:include name='description'/>
+                          </div>
+                        </b:if>
+                        <b:else/>
+                        <!--Show the image only-->
+                        <div id='header-inner'>
+                          <a expr:href='data:blog.homepageUrl' style='display: block'>
+                            <img expr:alt='data:title' expr:height='data:height' expr:id='data:widget.instanceId + &quot;_headerimg&quot;' expr:src='data:sourceUrl' expr:width='data:width' style='display: block'/>
+                          </a>
+                          <!--Show the description-->
+                          <b:if cond='data:imagePlacement == &quot;BEFORE_DESCRIPTION&quot;'>
+                            <b:include name='description'/>
+                          </b:if>
+                        </div>
+                      </b:if>
+                      <b:else/>
+                      <!--No header image -->
+                      <div id='header-inner'>
+                        <div class='titlewrapper'>
+                          <h1 class='title'>
+                            <b:include name='title'/>
+                          </h1>
+                        </div>
+                        <b:include name='description'/>
+                      </div>
+                    </b:if>
+                  </b:comment>
+                  <div class='header-headline'>
+                    <h1>
+                      <a class='notranslate' expr:href='data:blog.homepageUrl' expr:title='data:blog.title'>
+                        <data:blog.title/>
+                      </a>
+                    </h1>
+                    <p class='header-description'>
+                      <data:description/>
+                    </p>
+                  </div>
+                  <div class='header-search' role='search'>
+                    <form action='/search' target='_top'>
+                      <button aria-label='Search' class='hs-search reset js-ripple js-tooltip' title='Search' type='submit'>
+                        <svg aria-hidden='true' focusable='false' viewBox='0 0 24 24'>
+                          <path d='M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z'>
+                          </path>
+                        </svg>
+                      </button>
+                      <input aria-label='Search this blog' autocomplete='off' id='hs-input' name='q' placeholder='Search this blog' type='text' value=''/>
+                      <button aria-hidden='true' aria-label='Clear' class='hs-clear reset js-ripple js-tooltip' tabindex='-1' title='Clear' type='button'>
+                        <svg aria-hidden='true' focusable='false' viewBox='0 0 24 24'>
+                          <path d='M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z'>
+                          </path>
+                        </svg>
+                      </button>
+                    </form>
+                  </div>
+                  <button aria-label='Go to Content' class='go-down js-ripple js-tooltip' data-scroll='#main' data-scroll-offset='-60' data-scroll-speed='600' title='Go to Content'>
+                    <svg aria-hidden='true' focusable='false' viewBox='0 0 24 24'>
+                      <path d='M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z'/>
+                    </svg>
+                  </button>
+                </b:includable>
+                <b:includable id='description'>
+  <div class='descriptionwrapper'>
+    <p class='description'><span><data:description/></span></p>
+  </div>
+</b:includable>
+                <b:includable id='title'>
+  <b:tag cond='data:blog.url != data:blog.homepageUrl' expr:href='data:blog.homepageUrl' name='a'>
+    <data:title/>
+  </b:tag>
+</b:includable>
+              </b:widget>
+            </b:section>
+          </header> 
+        </b:if>
+        <aside id='drawer'>
+          <b:class cond='data:view.isMultipleItems' name='drawer-modal'/>
+          <b:class cond='data:view.isSingleItem' name='drawer-dismissible'/>
+          <div class='drawer-header'>
+            <h2 class='drawer-title notranslate'><data:blog.title/></h2>
+            <span class='drawer-subtitle'>Best Material Template</span>
+          </div>
+          <b:section class='drawer-content' id='Drawer' maxwidgets='1'>
+            <b:widget id='HTML6' locked='false' title='' type='HTML' version='1'>
+              <b:widget-settings>
+                <b:widget-setting name='content'>&lt;nav id=&#39;drawer-list&#39;&gt;
+   &lt;ul&gt;
+      &lt;!-- List Menu --&gt;
+      &lt;li class=&#39;nav-menu&#39;&gt;
+         &lt;!-- First Menu --&gt;
+         &lt;button data-nav-toggle=&#39;menu&#39; tabindex=&#39;-1&#39;&gt;&lt;span&gt;Menu 1&lt;/span&gt;&lt;i aria-hidden=&#39;true&#39; class=&#39;menu-indicator&#39;/&gt;&lt;/i&gt;&lt;/button&gt;
+         &lt;ul class=&#39;nav-item&#39;&gt;
+            &lt;li&gt;&lt;a href=&#39;#&#39; tabindex=&#39;-1&#39; target=&#39;_blank&#39; title=&#39;Link 1&#39;&gt;&lt;span&gt;Link 1&lt;/span&gt;&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+               &lt;!-- Submenu --&gt;
+               &lt;button data-nav-toggle=&#39;submenu&#39; tabindex=&#39;-1&#39;&gt;&lt;span&gt;Submenu 1&lt;/span&gt;&lt;i aria-hidden=&#39;true&#39; class=&#39;submenu-indicator&#39;/&gt;&lt;/i&gt;&lt;/button&gt;
+               &lt;ul class=&#39;nav-sub-menu&#39;&gt;
+                  &lt;li&gt;&lt;a href=&#39;#&#39; tabindex=&#39;-1&#39; title=&#39;Submenu Link 1&#39;&gt;&lt;span&gt;Submenu Link
+                     1&lt;/span&gt;&lt;/a&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&#39;#&#39; tabindex=&#39;-1&#39; title=&#39;Submenu Link 2&#39;&gt;&lt;span&gt;Submenu Link
+                     2&lt;/span&gt;&lt;/a&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&#39;#&#39; tabindex=&#39;-1&#39; title=&#39;Submenu Link 3&#39;&gt;&lt;span&gt;Submenu Link
+                     3&lt;/span&gt;&lt;/a&gt;
+                  &lt;/li&gt;
+               &lt;/ul&gt;
+            &lt;/li&gt;
+            &lt;!-- End Submenu --&gt;
+         &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;!-- End First Menu --&gt;
+   &lt;/ul&gt;
+   &lt;!-- End List Menu --&gt;
+   &lt;div class=&#39;divider&#39;&gt;&lt;/div&gt;
+   &lt;!-- Divider / Separator --&gt;
+   &lt;div class=&#39;nav-link&#39;&gt;
+      &lt;!-- Nav Link --&gt;
+      &lt;a href=&#39;#&#39; tabindex=&#39;-1&#39; title=&#39;RTL&#39;&gt;&lt;span&gt;RTL&lt;/span&gt;&lt;/a&gt;
+      &lt;a href=&#39;#&#39; tabindex=&#39;-1&#39; title=&#39;Default&#39;&gt;&lt;span&gt;Default&lt;/span&gt;&lt;/a&gt;
+      &lt;a href=&#39;#&#39; tabindex=&#39;-1&#39; title=&#39;404&#39;&gt;&lt;span&gt;404&lt;/span&gt;&lt;/a&gt;
+   &lt;/div&gt;
+   &lt;!-- End Nav Link --&gt;
+&lt;/nav&gt;</b:widget-setting>
+              </b:widget-settings>
+              <b:includable id='main'>
+                <data:content/>
+              </b:includable>
+            </b:widget>
+          </b:section> 
+        </aside>
+        <main id='main' tabindex='-1'>
+          <div id='content-wrap'>
+            <div class='adw'>
+              <b:section class='atb' id='Ads-Top' maxwidgets='1'>
+                <b:widget id='HTML7' locked='false' title='' type='HTML' version='1'>
+                  <b:widget-settings>
+                    <b:widget-setting name='content'>&lt;a href=&#39;https://themeplatinum.blogspot.com/&#39; target=&#39;_blank&#39; title=&#39;Pinky UI&#39;&gt;
+&lt;img alt=&#39;Iklan Pinky UI&#39; src=&#39;https://4.bp.blogspot.com/-tcd7F7tPTw0/XAacyoFtwrI/AAAAAAAAAKY/RH5exl3e2DwJs7UbqBncDXKe5LyRiO15gCLcBGAs/s1600/iklan_728x90_min.png&#39; style=&#39;display:block!important;border:1px solid rgba(0,0,0,.12);border-radius:6px;&#39;/&gt;
+&lt;/a&gt;</b:widget-setting>
+                  </b:widget-settings>
+                  <b:includable id='main'>
+                    <data:content/>
+                  </b:includable>
+                </b:widget>
+              </b:section>
+            </div>
+            <div id='content'>
+              <b:if cond='data:view.isHomepage'>
+                <b:section class='feature js' id='Feature' maxwidgets='1'>
+                  <b:widget id='HTML8' locked='false' title='' type='HTML'>
+                    <b:widget-settings>
+                      <b:widget-setting name='content'>&lt;div data-feature-label=&#39;&#39; id=&#39;featured&#39;&gt;
+  &lt;div class=&#39;feature-inner&#39;/&gt;
+  &lt;div class=&#39;feature-loading&#39;&gt;
+    &lt;div class=&#39;feature-mask&#39;/&gt;
+  &lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</b:widget-setting>
+                    </b:widget-settings>
+                    <b:includable id='main'>
+  <!-- only display title if it's non-empty -->
+  <b:if cond='data:title != &quot;&quot;'>
+    <h2 class='title'><data:title/></h2>
+  </b:if>
+  <div class='widget-content'>
+    <data:content/>
+  </div>
+
+  <b:include name='quickedit'/>
+</b:includable>
+                  </b:widget>
+                </b:section>
+              </b:if>
+              <b:section id='Blog'>
+                <b:widget id='HTML10' locked='false' title='' type='HTML'>
+                  <b:widget-settings>
+                    <b:widget-setting name='content'>&lt;textarea class=&quot;hidden&quot; id=&quot;notification-code&quot;&gt;&amp;lt;p&amp;gt;Lorem ipsum dolor sit amet consectetur adipiscing elit sociis convallis, cum imperdiet magna molestie lacinia libero ad ac, potenti viverra pulvinar morbi urna luctus massa ridiculus. Donec lectus ligula nam conubia vel sapien class praesent lacus, dictumst sociosqu etiam litora condimentum viverra duis tempor tellus, felis bibendum purus sodales lacinia inceptos scelerisque semper. Imperdiet risus ullamcorper rhoncus eu suscipit luctus viverra interdum, odio molestie euismod malesuada posuere morbi metus ante, cursus sollicitudin pulvinar placerat nisl faucibus aliquam. Augue sagittis integer rhoncus eros tortor convallis class eu tincidunt ad ullamcorper consequat conubia, elementum pretium vitae ante ornare etiam dis et lacus taciti nulla egestas. Dapibus potenti rutrum placerat ac cum hac, nisi erat primis rhoncus penatibus, convallis tincidunt nec varius tempus.&amp;lt;/p&amp;gt;
+&lt;/textarea&gt;</b:widget-setting>
+                  </b:widget-settings>
+                  <b:includable id='main'>
+  <!-- only display title if it's non-empty -->
+  <b:if cond='data:title != &quot;&quot;'>
+    <h2 class='title'><data:title/></h2>
+  </b:if>
+  <div class='widget-content'>
+    <data:content/>
+  </div>
+
+  <b:include name='quickedit'/>
 
     <div class="container">
         <section id="main_content">
